@@ -1,10 +1,20 @@
+import discord
+from discord.ext import commands
 import os
 
-token = os.getenv("TOKEN")
+TOKEN = os.getenv("TOKEN")
 
-print("TOKEN ENCONTRADO:", token is not None)
+intents = discord.Intents.default()
+intents.message_content = True
 
-if token:
-    print("LONGITUD:", len(token))
-else:
-    print("TOKEN NO ENCONTRADO")
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f"{bot.user} conectado")
+
+@bot.command()
+async def kundial(ctx):
+    await ctx.send("🏆 KU'NDIAL 2026 BOT ACTIVO")
+
+bot.run(TOKEN)
